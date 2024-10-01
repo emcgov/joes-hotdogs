@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Joe's Hotdogs</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        /* background-color: rgb(252, 253, 225); */
+        background-image: url("loaded-hot-dogs.jpg");
+        background-size: cover; /* Cover the entire area */
+        background-repeat: no-repeat; /* Prevent repeating */
+        background-position: center; /* Center the image */
+        color: black;
+        /* text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black,
+          1px 1px 0px black; Outline effect */
+        display: flex; /* Use flexbox to center content */
+        flex-direction: column;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Full viewport height */
+        margin: 0; /* Remove default body margin */
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 10vw;
+        margin-bottom: 1px;
+        margin-top: 0px;
+        padding-top: 0px;
+        color: white;
+        text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black,
+          1px 1px 0px black;
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 4vw;
+        margin-bottom: 20px;
+        color: white;
+        text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black,
+          1px 1px 0px black;
+      }
+
+      .receipt {
+        width: 200px;
+        height: auto; /* Allow height to adjust based on content */
+        border: 1px solid #000;
+        padding: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+      }
+
+      .receipt h2 {
+        text-align: center;
+      }
+
+      .receipt p {
+        margin: 5px 0; /* Add some margin between lines */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Joe's Hotdogs</h1>
+    <h3 id="place_ur_order">Place your order now!</h3>
+    <button
+      id="order_button"
+      style="justify-self: center"
+      onclick="beginOrder()"
+    >
+      Order here!
+    </button>
+    <script>
+      function showMoney(floating_point) {
+        const roundedValue = Math.round(floating_point * 100);
+
+        const dollars = Math.floor(roundedValue / 100);
+        const cents = Math.abs(roundedValue % 100);
+
+        const formattedCents = cents < 10 ? "0" + cents : cents;
+
+        return `$${dollars}.${formattedCents}`;
+      }
+
+      function beginOrder() {
+        const dogPrice = 4.8;
+        const fryPrice = 3.95;
+        const sodaPrice = 1.99;
+
+        numDogs = parseInt(prompt("How many hotdogs would you like?", "1"));
+        numFries = parseInt(prompt("How many fries would you like?", "1"));
+        numSoda = parseInt(prompt("How many sodas would you like?", "1"));
+        dog_cost = numDogs * dogPrice;
+        fry_cost = numFries * fryPrice;
+        soda_cost = numSoda * sodaPrice;
+
+        total = dog_cost + fry_cost + soda_cost;
+
+        //   document.writeln(`Total price is ${showMoney(total)}<br>`);
+
+        discount = 0;
+        if (total >= 25) {
+          discount = total * 0.1;
+
+          // document.writeln(`Discounted price is ${showMoney(total)}<br>`);
+        }
+        tax = (total - discount) * 0.0625;
+        //   document.writeln(`tax: ${showMoney(tax)}<br>`);
+        //   document.writeln(`Subtotal is ${showMoney(total + tax)}<br>`);
+
+        const receiptDiv = document.createElement("div");
+        receiptDiv.className = "receipt";
+
+        //   receiptDiv.style.width = "200px";
+        //   receiptDiv.style.height = "400px";
+        //   receiptDiv.style.border = "1px solid #000";
+        //   receiptDiv.style.padding = "10px";
+        //   receiptDiv.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
+        //   receiptDiv.style.fontFamily = "Arial, sans-serif";
+        //   receiptDiv.style.backgroundColor = "#f9f9f9";
+        //   receiptDiv.style.position = "absolute";
+        //   receiptDiv.style.top = "70%";
+        //   receiptDiv.style.left = "50%";
+        //   receiptDiv.style.transform = "translate(-50%, -50%)";
+
+        const title_child = document.createElement("h2");
+        title_child.textContent = "Receipt";
+        //   title_child.style.textAlign = "center";
+        receiptDiv.appendChild(title_child);
+
+        const dogs_child = document.createElement("p");
+        dogs_child.textContent = `Hotdog (${numDogs}x): ${showMoney(dog_cost)}`;
+        receiptDiv.appendChild(dogs_child);
+
+        const fries_child = document.createElement("p");
+        fries_child.textContent = `Soda (${numSoda}x): ${showMoney(soda_cost)}`;
+        receiptDiv.appendChild(fries_child);
+
+        const soda_child = document.createElement("p");
+        soda_child.textContent = `Fries (${numFries}x): ${showMoney(fry_cost)}`;
+        receiptDiv.appendChild(soda_child);
+
+        const total_child = document.createElement("p");
+        total_child.textContent = `Total: ${showMoney(total)}`;
+        receiptDiv.appendChild(total_child);
+
+        const discount_child = document.createElement("p");
+        discount_child.textContent = `Discount: ${showMoney(discount)}`;
+        receiptDiv.appendChild(discount_child);
+
+        const sub_child = document.createElement("p");
+        sub_child.textContent = `Subtotal: ${showMoney(total - discount)}`;
+        receiptDiv.appendChild(sub_child);
+
+        const tax_child = document.createElement("p");
+        tax_child.textContent = `Tax: ${showMoney(tax)}`;
+        receiptDiv.appendChild(tax_child);
+
+        const you_child = document.createElement("p");
+        you_child.textContent = `You pay: ${showMoney(total - discount + tax)}`;
+        you_child.style.fontWeight = "bold";
+        receiptDiv.appendChild(you_child);
+
+        document.getElementById("order_button").style.display = "none";
+        document.getElementById("place_ur_order").style.display = "none";
+        document.body.appendChild(receiptDiv);
+      }
+    </script>
+  </body>
+</html>
