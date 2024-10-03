@@ -13,18 +13,16 @@
           sans-serif;
         /* background-color: rgb(252, 253, 225); */
         background-image: url("loaded-hot-dogs.jpg");
-        background-size: cover; /* Cover the entire area */
-        background-repeat: no-repeat; /* Prevent repeating */
-        background-position: center; /* Center the image */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
         color: black;
-        /* text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black,
-          1px 1px 0px black; Outline effect */
-        display: flex; /* Use flexbox to center content */
+        display: flex;
         flex-direction: column;
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-        height: 100vh; /* Full viewport height */
-        margin: 0; /* Remove default body margin */
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
       }
 
       h1 {
@@ -49,7 +47,7 @@
 
       .receipt {
         width: 200px;
-        height: auto; /* Allow height to adjust based on content */
+        height: auto;
         border: 1px solid #000;
         padding: 10px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -62,7 +60,7 @@
       }
 
       .receipt p {
-        margin: 5px 0; /* Add some margin between lines */
+        margin: 5px 0;
       }
     </style>
   </head>
@@ -117,21 +115,8 @@
         const receiptDiv = document.createElement("div");
         receiptDiv.className = "receipt";
 
-        //   receiptDiv.style.width = "200px";
-        //   receiptDiv.style.height = "400px";
-        //   receiptDiv.style.border = "1px solid #000";
-        //   receiptDiv.style.padding = "10px";
-        //   receiptDiv.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
-        //   receiptDiv.style.fontFamily = "Arial, sans-serif";
-        //   receiptDiv.style.backgroundColor = "#f9f9f9";
-        //   receiptDiv.style.position = "absolute";
-        //   receiptDiv.style.top = "70%";
-        //   receiptDiv.style.left = "50%";
-        //   receiptDiv.style.transform = "translate(-50%, -50%)";
-
         const title_child = document.createElement("h2");
         title_child.textContent = "Receipt";
-        //   title_child.style.textAlign = "center";
         receiptDiv.appendChild(title_child);
 
         const dogs_child = document.createElement("p");
